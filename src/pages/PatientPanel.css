@@ -1,0 +1,147 @@
+.panel-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.panel-sidebar {
+  width: 280px;
+  min-width: 280px;
+  background: var(--colorPrimario);
+  color: var(--colorBlanco);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+}
+
+.panel-sidebar-brand h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.panel-sidebar-brand h2 span {
+  color: var(--colorSecundario);
+}
+
+.panel-sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 2rem;
+}
+
+.panel-user-avatar {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  background: var(--colorSecundario);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--colorBlanco);
+}
+
+.panel-user-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.panel-user-role {
+  font-size: 1.1rem;
+  opacity: 0.7;
+}
+
+.panel-sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.panel-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  color: var(--colorBlanco);
+  text-decoration: none;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+}
+
+.panel-menu-item:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.panel-menu-item.active {
+  background: rgba(255,255,255,0.15);
+  font-weight: 600;
+}
+
+.panel-menu-item i {
+  width: 2rem;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.panel-sidebar-footer {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1.5rem;
+}
+
+.panel-logout-btn {
+  width: 100%;
+  padding: 1rem;
+  background: transparent;
+  color: var(--colorBlanco);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 10px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  font-family: var(--fuentePrincipal);
+  transition: all 0.3s ease;
+}
+
+.panel-logout-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.5);
+}
+
+.panel-main {
+  flex: 1;
+  background: var(--colorFondoSeccion);
+  overflow-y: auto;
+}
+
+.panel-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-size: 1.6rem;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .panel-sidebar {
+    width: 100%;
+    min-width: auto;
+    padding: 1rem;
+  }
+  .panel-layout {
+    flex-direction: column;
+  }
+  .panel-sidebar-menu {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

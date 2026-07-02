@@ -1,0 +1,141 @@
+.specialties {
+    padding: 3rem 1.5rem;
+    background-color: var(--colorFondoSeccion);
+    box-shadow: 
+        0 4px 6px rgba(0,0,0,0.05),
+        0 10px 20px rgba(0,0,0,0.08);
+}
+
+.specialties__titulo {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--colorNegro);
+}
+
+.specialties__subtitulo {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #777;
+    margin-bottom: 4rem;
+    max-width: 50rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* MOBILE FIRST */
+.specialties__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* TARJETA */
+.specialty {
+    background: var(--colorBlanco);
+    padding: 2.5rem 2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.specialty:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.specialty__icon {
+    width: 70px;
+    height: 70px;
+    background-color: var(--colorPrimario);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.specialty__icon i {
+    font-size: 3rem;
+    color: var(--colorBlanco);
+}
+
+.specialty__title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--colorPrimario);
+}
+
+.specialty__description {
+    font-size: 1.4rem;
+    color: #555555;
+}
+
+/* BOTÓN CENTRADO */
+.specialties__boton-contenedor {
+    display: flex;
+    justify-content: center;
+}
+
+.specialties__boton {
+    display: inline-block;
+    background-color: var(--colorBoton);
+    color: var(--colorBlanco);
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.specialties__boton:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+@media (min-width: 768px) {
+    
+    .specialties__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .specialties__titulo {
+        font-size: 2.5rem;
+    }
+
+    .specialties__subtitulo {
+        font-size: 1.6rem;
+    }
+
+    .specialties__boton {
+        font-size: 1.5rem;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .specialties__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .specialties__titulo {
+        font-size: 2.7rem;
+    }
+
+    .specialties__subtitulo {
+        font-size: 1.7rem;
+    }
+
+    .specialties__boton {
+        font-size: 1.6rem;
+        padding: 1.2rem 3rem;
+    }
+}
