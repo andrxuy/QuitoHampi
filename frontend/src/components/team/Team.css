@@ -1,0 +1,154 @@
+.equipo {
+    padding: 4rem 1.5rem;
+    background-color: var(--colorFondoSeccion);
+}
+
+.equipo__header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.equipo__label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--colorPrimario);
+    letter-spacing: 2px;
+    margin-bottom: 0.8rem;
+}
+
+.equipo__titulo {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--colorNegro);
+}
+
+.equipo__subtitulo {
+    font-size: 1.4rem;
+    color: #777;
+}
+
+.equipo__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+/* TARJETA DOCTOR */
+.doctor {
+    background-color: var(--colorBlanco);
+    border-radius: 1.2rem;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.doctor:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.doctor__foto-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--colorPrimario);
+    margin-bottom: 0.6rem;
+}
+
+.doctor__foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+    .doctor__nombre {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--colorNegro);
+}
+
+.doctor__especialidad {
+    font-size: 1.2rem;
+    color: #777;
+}
+
+.doctor__redes {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 0.4rem;
+}
+
+.doctor__redes a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: var(--colorPrimario);
+    color: var(--colorBlanco);
+    border-radius: 50%;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.doctor__redes a:hover {
+    background-color: var(--colorBoton);
+    transform: translateY(-2px);
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .equipo__titulo {
+        font-size: 2.8rem;
+    }
+
+    .equipo__subtitulo {
+        font-size: 1.5rem;
+    }
+
+    .doctor__foto-wrapper {
+        width: 110px;
+        height: 110px;
+    }
+
+    .doctor__nombre {
+    font-size: 1.6rem;
+    }
+
+    .doctor__especialidad {
+        font-size: 1.4rem;
+    }
+}
+
+/* PC */
+@media (min-width: 1024px) {
+    .equipo {
+        padding: 6rem 0;
+    }
+
+    .equipo__titulo {
+        font-size: 3.2rem;
+    }
+
+    .equipo__subtitulo {
+        font-size: 1.6rem;
+    }
+
+    .equipo__grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .doctor__foto-wrapper {
+        width: 120px;
+        height: 120px;
+    }
+}

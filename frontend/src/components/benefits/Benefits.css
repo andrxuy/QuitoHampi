@@ -1,0 +1,189 @@
+.benefits {
+    padding: 3rem 1.5rem;
+
+    background-color: var(--colorFondoSeccion);
+
+    box-shadow: 
+        0 4px 6px rgba(0,0,0,0.05),
+        0 -4px 10px rgba(0,0,0,0.05),
+        0 10px 20px rgba(0,0,0,0.08);
+}
+
+
+.benefits__titulo {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 3rem;
+  color: var(--colorTexto);
+}
+
+/* MOBILE FIRST */
+.benefits__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* TARJETA */
+.benefit{
+  background: var(--colorBlanco);
+  padding: 2rem;
+  border-radius: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.benefit img {
+  width: 60px;
+  margin-bottom: 1.5rem;
+}
+
+.benefit h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--colorPrimario);
+}
+
+.benefit p {
+  font-size: 1.4rem;
+  color: #555555;
+}
+
+/* =========================
+   TABS
+========================= */
+.benefits__tablist {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    list-style: none;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.benefits__tab {
+    padding: 0.8rem 1.8rem;
+    border-radius: 14px;
+    background-color: var(--colorBlanco);
+    color: var(--colorNegro);
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    list-style: none;
+}
+
+.benefits__tab:hover {
+    border-color: var(--colorPrimario);
+}
+
+.benefits__tab.react-tabs__tab--selected {
+    background-color: var(--colorBoton);
+    color: var(--colorBlanco);
+    border-color: var(--colorBoton);
+}
+
+.benefits__tab:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* =========================
+   TABLET
+========================= */
+@media (min-width: 768px) {
+
+  .benefits {
+    padding: 4rem 2rem;
+  }
+
+  .benefits__titulo {
+    font-size: 2.8rem;
+  }
+
+  .benefits__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+
+  .benefit {
+    padding: 2.5rem;
+  }
+
+  .benefit img {
+    width: 70px;
+  }
+
+  .benefit h3 {
+    font-size: 2rem;
+  }
+
+  .benefit p {
+    font-size: 1.7rem;
+  }
+
+  .benefits__tab {
+    font-size: 1.6rem;
+    padding: 1rem 2.2rem;
+  }
+}
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width: 1024px) {
+
+  .benefits {
+    padding: 5rem 2rem;
+  }
+
+  .benefits__titulo {
+    font-size: 3.2rem;
+    margin-bottom: 4rem;
+  }
+
+  .benefits__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+
+  .benefit {
+    padding: 3rem 2.5rem;
+  }
+
+  .benefit img {
+    width: 80px;
+    margin-bottom: 2rem;
+  }
+
+  .benefit h3 {
+    font-size: 2.2rem;
+  }
+
+  .benefit p {
+    font-size: 2rem;
+    line-height: 1.6;
+  }
+}
+
+/* Centrar la tercera card cuando queda sola - SOLO TABLET */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  .benefits__grid .benefit:nth-child(3):last-child {
+    grid-column: 1 / 3;
+    max-width: 50%;
+    margin: 0 auto;
+  }
+}

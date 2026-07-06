@@ -1,0 +1,112 @@
+.contact {
+  padding: 3rem 1.5rem;
+  background-color: #f9f9f9;
+}
+
+.contact__container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* FORM */
+.contact__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact__title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--colorPrimario);
+}
+
+.contact__description {
+  font-size: 0.9rem;
+  margin: 0.8rem 0 0.4rem;
+  color: #555;
+}
+
+.contact__input,
+.contact__textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.contact__textarea {
+  resize: none;
+  min-height: 100px;
+}
+
+/* CHECK */
+.contact__check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+}
+
+/* BUTTON */
+.contact__button {
+    background-color: var(--colorBoton);
+    color: var(--colorBlanco);
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-radius: 14px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.contact__button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+/* MAP */
+.contact__map {
+  width: 100%;
+  height: 250px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .contact {
+        padding: 3rem 2rem;
+    }
+
+    .contact__title {
+        font-size: 1.8rem;
+    }
+
+    .contact__input,
+    .contact__textarea {
+        font-size: 1rem;
+    }
+
+    .contact__map {
+        height: 300px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .contact__container {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .contact__form {
+        width: 50%;
+    }
+
+    .contact__map {
+        width: 50%;
+        height: auto;
+    }
+}

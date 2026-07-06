@@ -1,0 +1,130 @@
+.informacion {
+    padding: 3rem 1.5rem;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.03),
+        var(--colorFondoSeccion)
+    );
+}
+
+.informacion__contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    text-align: center;
+}
+
+.informacion__imagen {
+    display: flex;
+    justify-content: center;
+}
+
+.informacion__imagen img {
+    width: 100%;
+    max-width: 30rem;
+    height: auto;
+    border-radius: 1rem;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+}
+
+.informacion__contenido {
+    text-align: center;
+}
+
+.informacion__subtitulo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--colorPrimario);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.informacion__titulo {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+.informacion__descripcion {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.informacion__boton {
+    display: inline-block;
+    background-color: var(--colorBoton);
+    color: var(--colorBlanco);
+    padding: 0.8rem 1.6rem;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.informacion__boton:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+
+    .informacion {
+        padding: 5rem 2rem;
+    }
+
+    .informacion__contenedor {
+        gap: 3rem;
+    }
+
+    .informacion__imagen img {
+        max-width: 40rem;
+    }
+
+    .informacion__subtitulo {
+        font-size: 1.7rem;
+    }
+
+    .informacion__titulo {
+        font-size: 2.8rem;
+    }
+
+    .informacion__descripcion {
+        font-size: 1.6rem;
+    }
+
+    .informacion__boton {
+        font-size: 1.4rem;
+    }
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+
+    .informacion__contenedor {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        text-align: left;
+    }
+
+    .informacion__imagen,
+    .informacion__contenido {
+        flex: 1;
+    }
+
+    .informacion__contenido {
+        max-width: 60rem;
+        text-align: left;
+    }
+
+    .informacion__imagen {
+        justify-content: center;
+    }
+
+    .informacion__imagen img {
+        max-width: 45rem;
+    }
+}
