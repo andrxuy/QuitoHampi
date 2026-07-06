@@ -1,0 +1,114 @@
+.partners {
+    padding: 4rem 0;
+    background-color: var(--colorBlanco);
+}
+.partners__container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.partners__header {
+    text-align: center;
+}
+.partners__title {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+.partners__description {
+    font-size: 1.4rem;
+    color: #555;
+}
+.partners__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.partners__card {
+    background-color: var(--colorFondoSeccion);
+    border-radius: 1.2rem;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+.partners__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.partners__logo {
+    width: 100%;
+    max-width: 12rem;
+    height: auto;
+    object-fit: contain;
+}
+.partners__name {
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+
+    .partners {
+        padding: 5rem 0;
+    }
+
+    .partners__title {
+        font-size: 3rem;
+    }
+
+    .partners__description {
+        font-size: 1.5rem;
+    }
+
+    .partners__content {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 2rem;
+    }
+
+}
+@media (min-width: 1024px) {
+
+    .partners {
+        padding: 6rem 0;
+    }
+
+    .partners__container {
+        gap: 4rem;
+    }
+
+    .partners__title {
+        font-size: 3.6rem;
+    }
+
+    .partners__description {
+        font-size: 1.6rem;
+
+        max-width: 70rem;
+
+        margin: 0 auto;
+    }
+
+    .partners__content {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .partners__card {
+        padding: 2rem;
+    }
+
+    .partners__logo {
+        max-width: 14rem;
+    }
+}

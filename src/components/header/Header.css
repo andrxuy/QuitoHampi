@@ -1,0 +1,108 @@
+.header {
+    background-color: var(--colorBlanco);
+    padding: 1rem 1.5rem;
+    padding-bottom: 2rem;
+    box-shadow: 
+        0 4px 6px rgba(0,0,0,0.05),
+        0 10px 20px rgba(0,0,0,0.08);
+}
+
+.nav__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar_logo {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.navbar__logo--primary {
+    color: var(--colorPrimario);
+}
+
+.nav__menu {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.nav__menu a {
+    text-decoration: none;
+    color: var(--colorNegro);
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+}
+
+.nav__menu a:hover:not(.nav__login-btn) {
+    color: var(--colorPrimario);
+}
+
+.nav__menu .nav__login-btn {
+    background-color: var(--colorBoton);
+    color: var(--colorBlanco);
+    padding: 0.6rem 1.4rem;
+    border: none;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.nav__login-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.nav__menu .nav__register-btn {
+    background-color: var(--colorBoton);
+    color: var(--colorBlanco);
+    padding: 0.6rem 1.4rem;
+    border: none;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.nav__register-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+@media (min-width: 768px) {
+    .nav__menu {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .navbar_logo{
+        font-size: 2.6rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .nav__header {
+        flex-direction: row;
+        align-items: center;
+    }
+    .navbar_logo {
+        margin-bottom: 0;
+        font-size: 3rem;
+    }
+    .nav__menu {
+        flex-direction: row;
+        margin-left: auto;
+        gap: 2rem;
+        margin-top: 1rem;
+    }
+    .nav__menu a {
+        font-size: 1.5rem;
+    }
+}

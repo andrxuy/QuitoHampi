@@ -1,0 +1,129 @@
+.download {
+    padding: 4rem 0;
+    background-color: var(--colorFondoSeccion);
+}
+.download__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+.download__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.download__title {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+.download__description {
+    font-size: 1.4rem;
+    color: #555;
+    max-width: 35rem;
+}
+.download__stores {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+.download__store {
+    transition: transform 0.3s ease;
+}
+.download__store:hover {
+    transform: scale(1.03);
+}
+.download__store img {
+    width: 100%;
+    max-width: 18rem;
+    height: auto;
+}
+.download__image img {
+    width: 100%;
+
+    max-width: 28rem;
+
+    height: auto;
+
+    filter:
+        drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+}
+@media (min-width: 768px) {
+
+    .download {
+        padding: 5rem 0;
+    }
+
+    .download__container {
+        flex-direction: row;
+
+        justify-content: space-between;
+        align-items: center;
+
+        gap: 4rem;
+    }
+
+    .download__content {
+        align-items: flex-start;
+
+        text-align: left;
+
+        flex: 1;
+    }
+
+    .download__title {
+        font-size: 3rem;
+    }
+
+    .download__description {
+        font-size: 1.5rem;
+    }
+
+    .download__stores {
+        flex-direction: row;
+
+        width: auto;
+    }
+
+    .download__image {
+        flex: 1;
+
+        display: flex;
+        justify-content: center;
+    }
+
+    .download__image img {
+        max-width: 32rem;
+    }
+
+}
+@media (min-width: 1024px) {
+
+    .download {
+        padding: 6rem 0;
+    }
+
+    .download__container {
+        gap: 6rem;
+    }
+
+    .download__title {
+        font-size: 3.8rem;
+    }
+
+    .download__description {
+        font-size: 1.6rem;
+
+        max-width: 50rem;
+    }
+
+    .download__store img {
+        max-width: 20rem;
+    }
+
+    .download__image img {
+        max-width: 38rem;
+    }
+}
