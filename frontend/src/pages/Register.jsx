@@ -9,6 +9,7 @@ const Register = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
+    cedula: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -74,19 +75,24 @@ const Register = () => {
     setFiles(files.filter((_, i) => i !== index))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
     setSuccess('')
 
     const { 
-      nombre, apellido, email, password, confirmPassword, 
+      nombre, apellido, cedula, email, password, confirmPassword, 
       telefono, edad, especialidad, otraEspecialidad, titulos, certificaciones 
     } = formData
 
     // Basic validation
-    if (!nombre || !apellido || !email || !password || !confirmPassword || !telefono) {
+    if (!nombre || !apellido || !cedula || !email || !password || !confirmPassword || !telefono) {
       setError('Campos obligatorios incompletos')
+      return
+    }
+
+    if (!/^\d{10}$/.test(cedula)) {
+      setError('La cédula debe tener exactamente 10 dígitos numéricos')
       return
     }
 
@@ -115,60 +121,61 @@ const Register = () => {
       }
     }
 
-    // Prepare user object
     const finalSpecialty = especialidad === 'Otros' ? otraEspecialidad : especialidad;
 
-    const newUser = {
-      email,
-      password,
-      role,
+    const payload = {
       nombre,
       apellido,
-      telefono,
-      fechaRegistro: new Date().toISOString().split('T')[0],
-      estado: role === 'medico' ? 'Pendiente' : 'Activo'
+      email,
+      password,
+      rol: role,
+      cedula,
+      telefono
     }
 
     if (role === 'medico') {
-      newUser.edad = parseInt(edad);
-      newUser.especialidad = finalSpecialty;
-      newUser.titulos = titulos;
-      newUser.certificaciones = certificaciones;
-      newUser.documentos = files;
-      newUser.foto = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150'; // default doctor photo
+      payload.especialidad = finalSpecialty
+      payload.edad = parseInt(edad)
     }
 
-    // Try adding to database
-    const res = db.addUser(newUser)
-    if (!res.success) {
-      setError(res.message)
-      return
-    }
+    setError('')
+    setSuccess('')
 
-    // If doctor registered with "Otros", add it to suggested specialties
-    if (role === 'medico' && especialidad === 'Otros') {
-      db.addSuggestedSpecialty(otraEspecialidad, `Dr. ${nombre} ${apellido}`)
-    }
+    try {
+      const response = await fetch('http://localhost:3001/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
 
-    if (role === 'medico') {
-      setSuccess('Registro exitoso, pendiente de verificación')
-      // Reset form
+      const data = await response.json()
+
+      if (!response.ok) {
+        setError(data.error || 'Error al registrar')
+        return
+      }
+
+      setSuccess(data.message || 'Registro exitoso')
       setFormData({
-        nombre: '', apellido: '', email: '', password: '', confirmPassword: '',
+        nombre: '', apellido: '', cedula: '', email: '', password: '', confirmPassword: '',
         telefono: '', edad: '', especialidad: '', otraEspecialidad: '', titulos: '', certificaciones: ''
       })
       setFiles([])
-    } else {
-      setSuccess('¡Registro exitoso! Redirigiendo al inicio de sesión...')
+
       setTimeout(() => {
         navigate('/login')
       }, 2000)
+    } catch (err) {
+      setError('Error de conexión con el servidor')
     }
   }
 
   return (
     <div className="register-container">
       <div className="register-card">
+        <Link to="/" className="back-home-btn">
+          <i className="fa-solid fa-arrow-left"></i> Volver al inicio
+        </Link>
         <div className="register-header">
           <h2 className="register-title">
             <TypeIt
@@ -232,6 +239,22 @@ const Register = () => {
                 required
               />
             </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="cedula">Cédula de identidad</label>
+            <input
+              type="text"
+              id="cedula"
+              placeholder="Ej: 1712345678"
+              maxLength="10"
+              value={formData.cedula}
+              onChange={(e) => {
+                const val = e.target.value.replace(/\D/g, '').slice(0, 10)
+                setFormData({ ...formData, cedula: val })
+              }}
+              required
+            />
           </div>
 
           <div className="form-row">

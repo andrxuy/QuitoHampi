@@ -1,5 +1,6 @@
 import * as authService from './auth.service.js'
 import { supabase } from '../../config/database.js'
+import { validarTelefono } from '../../utils/validarTelefono.js'
 
 export const login = async (req, res) => {
   const { email, password } = req.body
@@ -16,17 +17,43 @@ export const login = async (req, res) => {
 }
 
 export const register = async (req, res) => {
-  const { nombre, apellido, email, password, especialidad, telefono } = req.body
-  if (!nombre || !apellido || !email || !password || !especialidad) {
+  const { nombre, apellido, email, password, rol, especialidad, telefono, cedula } = req.body
+  console.log('[REGISTER] body recibido:', { nombre, apellido, email, password: password ? '***' : undefined, rol, especialidad, telefono, cedula })
+
+  if (!nombre || !apellido || !email || !password || !cedula) {
     return res.status(400).json({ error: 'Todos los campos son requeridos' })
   }
 
-  const result = await authService.registerMedico(req.body)
-  if (!result.success) {
-    return res.status(400).json({ error: result.message })
+  if (!rol || !['paciente', 'medico'].includes(rol)) {
+    return res.status(400).json({ error: 'Rol inválido. Use paciente o medico' })
   }
 
-  return res.status(201).json({ message: 'Registro exitoso. Tu solicitud está pendiente de verificación.', user: result.user })
+  if (telefono && !validarTelefono(telefono)) {
+    return res.status(400).json({ error: 'El número de teléfono no es válido. Debe ser un celular ecuatoriano (09XXXXXXXX o +5939XXXXXXXX)' })
+  }
+
+  if (rol === 'medico' && !especialidad) {
+    return res.status(400).json({ error: 'La especialidad es requerida para médicos' })
+  }
+
+  const result = await authService.registerUser(req.body)
+  if (!result.success) {
+    switch (result.message) {
+      case 'La cédula ingresada no es válida':
+        return res.status(400).json({ error: result.message })
+      case 'El correo ya está registrado':
+      case 'Ya existe una cuenta registrada con esta cédula':
+        return res.status(409).json({ error: result.message })
+      default:
+        return res.status(500).json({ error: result.message })
+    }
+  }
+
+  const mensaje = rol === 'medico'
+    ? 'Registro exitoso. Tu solicitud está pendiente de verificación.'
+    : 'Registro exitoso. Ya puedes iniciar sesión.'
+
+  return res.status(201).json({ message: mensaje, user: result.user })
 }
 
 export const forgotPassword = async (req, res) => {
