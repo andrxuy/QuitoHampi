@@ -418,47 +418,31 @@
     }
 }
 
-/* Demo Credentials Styling */
-.demo-credentials {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background: #F5F7FA;
-    border-radius: 14px;
-    border: 1px solid #E0E0E0;
-    text-align: center;
-}
-.demo-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 0.8rem;
-}
-.demo-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-}
-.demo-btn {
-    padding: 0.5rem 0.8rem;
-    border: 1px solid #3498DB;
-    border-radius: 8px;
-    background: white;
-    color: #3498DB;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-.demo-btn:hover {
-    background: #3498DB;
-    color: white;
-}
-.demo-btn.admin {
-    border-color: #2C3E55;
-    color: #2C3E55;
-}
-.demo-btn.admin:hover {
+.back-home-btn {
+    position: absolute;
+    top: 1.2rem;
+    left: 1.5rem;
     background: #2C3E55;
     color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.6rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+.back-home-btn:hover {
+    background: #3498DB;
+}
+@media (max-width: 480px) {
+    .back-home-btn {
+        top: 0.8rem;
+        left: 1rem;
+        font-size: 0.85rem;
+        padding: 0.6rem 1.2rem;
+    }
 }

@@ -5,7 +5,7 @@ const mockSupabase = { from: jest.fn() }
 
 jest.unstable_mockModule('../config/database.js', () => ({ supabase: mockSupabase }))
 
-const { loginUser, registerMedico } = await import('../modules/auth/auth.service.js')
+const { loginUser, registerUser } = await import('../modules/auth/auth.service.js')
 
 beforeEach(() => { mockSupabase.from.mockReset() })
 
@@ -14,12 +14,13 @@ describe('RNF-001: bcrypt encripta contraseña al registrar', () => {
     let storedPassword = ''
     mockSupabase.from.mockReturnValue({
       select: jest.fn(() => ({ eq: jest.fn(() => ({ single: jest.fn(() => Promise.resolve({ data: null, error: { message: 'not found' } })) })) })),
-      insert: jest.fn((data) => { storedPassword = data[0].password; return { select: jest.fn(() => ({ single: jest.fn(() => Promise.resolve({ data: { id: 2, ...data[0] }, error: null })) })) } })
+      insert: jest.fn((data) => { if (data[0].password) storedPassword = data[0].password; return { select: jest.fn(() => ({ single: jest.fn(() => Promise.resolve({ data: { id: 2, ...data[0] }, error: null })) })) } })
     })
 
-    const result = await registerMedico({
+    const result = await registerUser({
       email: 'dr@test.com', password: 'MiPass123',
-      nombre: 'Test', apellido: 'Dr', especialidad: 'Cardiología'
+      nombre: 'Test', apellido: 'Dr', especialidad: 'Cardiología',
+      cedula: '1700000001', rol: 'medico', telefono: '0991234567'
     })
 
     expect(result.success).toBe(true)

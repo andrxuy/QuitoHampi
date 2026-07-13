@@ -1,6 +1,8 @@
 import { supabase } from '../../config/database.js'
 import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import { validarCedula } from '../../utils/validarCedula.js'
+import { validarTelefono } from '../../utils/validarTelefono.js'
 
 export const loginUser = async (email, password) => {
   const { data: user, error } = await supabase
@@ -56,35 +58,114 @@ export const loginUser = async (email, password) => {
   return { success: true, token, user: { id: user.id, email: user.email, rol: user.rol, estado: user.estado } }
 }
 
-export const registerMedico = async (userData) => {
-  const { data: existing } = await supabase
+export const registerUser = async (userData) => {
+  console.log('[SERVICE registerUser] datos recibidos:', { ...userData, password: userData.password ? '***' : undefined })
+
+  if (!userData.cedula) {
+    return { success: false, message: 'La cédula es requerida' }
+  }
+
+  if (!validarCedula(userData.cedula)) {
+    return { success: false, message: 'La cédula ingresada no es válida' }
+  }
+
+  const { data: existingEmail } = await supabase
     .from('usuarios')
     .select('id')
     .eq('email', userData.email.toLowerCase())
     .single()
 
-  if (existing) {
+  if (existingEmail) {
     return { success: false, message: 'El correo ya está registrado' }
+  }
+
+  const { data: existingCedulaPaciente } = await supabase
+    .from('pacientes')
+    .select('id')
+    .eq('cedula', userData.cedula)
+    .single()
+
+  const { data: existingCedulaMedico } = await supabase
+    .from('medicos')
+    .select('id')
+    .eq('cedula', userData.cedula)
+    .single()
+
+  if (existingCedulaPaciente || existingCedulaMedico) {
+    return { success: false, message: 'Ya existe una cuenta registrada con esta cédula' }
   }
 
   const hashedPassword = await bcryptjs.hash(userData.password, 10)
 
-  const { data, error } = await supabase
+  const estado = userData.rol === 'medico' ? 'pendiente' : 'activo'
+
+  console.log('[SERVICE] insertando en usuarios...')
+  const { data: usuario, error: errUsuario } = await supabase
     .from('usuarios')
     .insert([{
       email: userData.email.toLowerCase(),
       password: hashedPassword,
-      rol: 'medico',
-      estado: 'pendiente'
+      rol: userData.rol,
+      estado
     }])
     .select()
     .single()
 
-  if (error) {
-    return { success: false, message: 'Error al registrar: ' + error.message }
+  if (errUsuario) {
+    console.log('[SERVICE] ERROR al insertar usuario:', errUsuario.message)
+    return { success: false, message: 'Error al registrar usuario: ' + errUsuario.message }
   }
 
-  return { success: true, user: data }
+  console.log('[SERVICE] usuario creado:', usuario.id)
+
+  if (userData.rol === 'paciente') {
+    console.log('[SERVICE] insertando en pacientes...')
+    const { data: paciente, error: errPaciente } = await supabase
+      .from('pacientes')
+      .insert([{
+        usuario_id: usuario.id,
+        nombre: userData.nombre,
+        apellido: userData.apellido,
+        cedula: userData.cedula,
+        telefono: userData.telefono || null
+      }])
+      .select()
+      .single()
+
+    if (errPaciente) {
+      console.log('[SERVICE] ERROR al insertar paciente:', errPaciente.message)
+      return { success: false, message: 'Error al registrar datos del paciente: ' + errPaciente.message }
+    }
+
+    console.log('[SERVICE] paciente creado:', paciente.id)
+    return { success: true, user: { ...usuario, perfil: paciente } }
+  }
+
+  if (userData.rol === 'medico') {
+    console.log('[SERVICE] insertando en medicos...')
+    const { data: medico, error: errMedico } = await supabase
+      .from('medicos')
+      .insert([{
+        usuario_id: usuario.id,
+        nombre: userData.nombre,
+        apellido: userData.apellido,
+        cedula: userData.cedula,
+        telefono: userData.telefono || null,
+        especialidad: userData.especialidad
+      }])
+      .select()
+      .single()
+
+    if (errMedico) {
+      console.log('[SERVICE] ERROR al insertar medico:', errMedico.message)
+      return { success: false, message: 'Error al registrar datos del médico: ' + errMedico.message }
+    }
+
+    console.log('[SERVICE] medico creado:', medico.id)
+    return { success: true, user: { ...usuario, perfil: medico } }
+  }
+
+  return { success: true, user: usuario }
 }
 
 export const changePassword = async (userId, currentPassword, newPassword) => {

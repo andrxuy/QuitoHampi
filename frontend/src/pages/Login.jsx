@@ -93,16 +93,12 @@ const Login = () => {
     }
   }
 
-  // Helper function to quick-fill credentials for testing
-  const fillCredentials = (roleEmail, rolePass) => {
-    setEmail(roleEmail)
-    setPassword(rolePass)
-    setError('')
-  }
-
   return (
     <div className="login-container">
       <div className="login-card">
+        <Link to="/" className="back-home-btn">
+          <i className="fa-solid fa-arrow-left"></i> Volver al inicio
+        </Link>
         <div className="login-header">
           <h2 className="login-title">
             <TypeIt
@@ -169,33 +165,6 @@ const Login = () => {
           </button>
         </form>
 
-        {/* Demo Credentials Section for testing convenience */}
-        <div className="demo-credentials">
-          <p className="demo-title">Accesos Rápidos de Prueba (Demo):</p>
-          <div className="demo-buttons">
-            <button 
-              type="button" 
-              className="demo-btn admin"
-              onClick={() => fillCredentials('admin@quitohampi.com', 'admin123')}
-            >
-              Administrador
-            </button>
-            <button 
-              type="button" 
-              className="demo-btn medico"
-              onClick={() => fillCredentials('doctor@quitohampi.com', 'doctor123')}
-            >
-              Médico (Verificado)
-            </button>
-            <button 
-              type="button" 
-              className="demo-btn paciente"
-              onClick={() => fillCredentials('paciente@quitohampi.com', 'paciente123')}
-            >
-              Paciente
-            </button>
-          </div>
-        </div>
         
         <div className="login-footer">
           <p>¿No tienes cuenta? <Link to="/registro">Regístrate aquí</Link></p>
